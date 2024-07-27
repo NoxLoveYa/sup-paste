@@ -1174,7 +1174,7 @@ public:
 		//RegisterElement(&glowcolor, 1);
 
 		// col2.
-		removals.setup(XOR("Removals"), XOR("removals"), { XOR("Visual recoil"), XOR("Fog"), XOR("Flashbang"), XOR("Teammates"), XOR("Scope")});
+		removals.setup(XOR("Removals"), XOR("removals"), { XOR("Visual recoil"), XOR("Fog"), XOR("Flashbang"), XOR("Smoke"), XOR("Scope")});
 		RegisterElement(&removals, 1);
 		//novisrecoil.setup(XOR("Remove visual recoil"), XOR("novisrecoil"));
 		//RegisterElement(&novisrecoil, 1);

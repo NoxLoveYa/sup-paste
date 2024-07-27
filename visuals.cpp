@@ -339,11 +339,6 @@ void Visuals::IndicateAngles()
 	}
 }
 
-
-
-
-
-
 void Visuals::Hitmarker() {
 
 	//static auto cross = g_csgo.m_cvar->FindVar(HASH("weapon_debug_spread_show"));
@@ -398,26 +393,26 @@ void Visuals::Hitmarker() {
 }
 
 void Visuals::NoSmoke() {
-	if (!g_csgo.m_engine->IsInGame())
-		return;
-	//colado https://www.unknowncheats.me/forum/counterstrike-global-offensive/262635-epic-wireframe-smoke.html
-	std::vector<const char*> vistasmoke_mats =
-	{
-			"particle/vistasmokev1/vistasmokev1_fire",
-			"particle/vistasmokev1/vistasmokev1_smokegrenade",
-			"particle/vistasmokev1/vistasmokev1_emods",
-			"particle/vistasmokev1/vistasmokev1_emods_impactdust",
-	};
+	//if (!g_csgo.m_engine->IsInGame())
+	//	return;
+	////colado https://www.unknowncheats.me/forum/counterstrike-global-offensive/262635-epic-wireframe-smoke.html
+	//std::vector<const char*> vistasmoke_mats =
+	//{
+	//		"particle/vistasmokev1/vistasmokev1_fire",
+	//		"particle/vistasmokev1/vistasmokev1_smokegrenade",
+	//		"particle/vistasmokev1/vistasmokev1_emods",
+	//		"particle/vistasmokev1/vistasmokev1_emods_impactdust",
+	//};
 
 
 
-	for (auto mat_s : vistasmoke_mats)
-	{
-		IMaterial* mat = g_csgo.m_material_system->FindMaterial(mat_s, XOR("Other textures"));
-		mat->SetFlag(MATERIAL_VAR_WIREFRAME, true);
-	}
-	static auto mat_postprocess_enable = g_csgo.m_cvar->FindVar(HASH("mat_postprocess_enable"));
-	mat_postprocess_enable->SetValue(XOR("0"));
+	//for (auto mat_s : vistasmoke_mats)
+	//{
+		//IMaterial* mat = g_csgo.m_material_system->FindMaterial(mat_s, XOR("Other textures"));
+		//mat->SetFlag(MATERIAL_VAR_WIREFRAME, true);
+	//}
+	//static auto mat_postprocess_enable = g_csgo.m_cvar->FindVar(HASH("mat_postprocess_enable"));
+	//mat_postprocess_enable->SetValue(XOR("0"));
 }
 
 

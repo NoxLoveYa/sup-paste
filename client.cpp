@@ -250,10 +250,10 @@ void Client::Skybox()
 
 	//float destiny = g_menu.main.visuals.Fogdensity.get() / 100.f;
 
-	//static const auto fog_enable = g_csgo.m_cvar->FindVar(HASH("fog_enable"));
-	//fog_enable->SetValue(1); //Включает туман на карте если он выключен по дефолту
-	//static const auto fog_override = g_csgo.m_cvar->FindVar(HASH("fog_override"));
-	//fog_override->SetValue(g_menu.main.visuals.FogOverride.get()); // Разрешает кастомизацию тумана
+	static const auto fog_enable = g_csgo.m_cvar->FindVar(HASH("fog_enable"));
+	fog_enable->SetValue(!g_menu.main.visuals.removals.get(1));
+	static const auto fog_override = g_csgo.m_cvar->FindVar(HASH("fog_override"));
+	fog_override->SetValue(1);
 	//static const auto fog_color = g_csgo.m_cvar->FindVar(HASH("fog_color"));
 	//fog_color->SetValue(std::string(std::to_string(g_menu.main.visuals.FogColor.get().r()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().g()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().b())).c_str()); //Цвет тумана rgb
 	//static const auto fog_start = g_csgo.m_cvar->FindVar(HASH("fog_start"));
