@@ -6,9 +6,8 @@ bool Hooks::ShouldDrawParticles( ) {
 
 bool Hooks::ShouldDrawFog( ) {
 	// remove fog.
-	if( g_menu.main.visuals.removals.get(2) && !g_menu.main.visuals.FogOverride.get() )
+	if( g_menu.main.visuals.removals.get(1) )
 		return false;
-
 	return g_hooks.m_client_mode.GetOldMethod< ShouldDrawFog_t >( IClientMode::SHOULDDRAWFOG )( this );
 }
 

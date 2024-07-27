@@ -248,20 +248,20 @@ void Client::Skybox()
 	*/
 	//g_menu.main.visuals.FogColor.get().r(), g_menu.main.visuals.FogColor.get().g(), g_menu.main.visuals.FogColor.get().b()
 
-	float destiny = g_menu.main.visuals.Fogdensity.get() / 100.f;
+	//float destiny = g_menu.main.visuals.Fogdensity.get() / 100.f;
 
-	static const auto fog_enable = g_csgo.m_cvar->FindVar(HASH("fog_enable"));
-	fog_enable->SetValue(1); //Включает туман на карте если он выключен по дефолту
-	static const auto fog_override = g_csgo.m_cvar->FindVar(HASH("fog_override"));
-	fog_override->SetValue(g_menu.main.visuals.FogOverride.get()); // Разрешает кастомизацию тумана
-	static const auto fog_color = g_csgo.m_cvar->FindVar(HASH("fog_color"));
-	fog_color->SetValue(std::string(std::to_string(g_menu.main.visuals.FogColor.get().r()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().g()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().b())).c_str()); //Цвет тумана rgb
-	static const auto fog_start = g_csgo.m_cvar->FindVar(HASH("fog_start"));
-	fog_start->SetValue(g_menu.main.visuals.FogStart.get()); // Дистанция с которой туман появляется
-	static const auto fog_end = g_csgo.m_cvar->FindVar(HASH("fog_end"));
-	fog_end->SetValue(g_menu.main.visuals.FogEnd.get()); // Дистанция с которой туман пропадает
-	static const auto fog_destiny = g_csgo.m_cvar->FindVar(HASH("fog_maxdensity"));
-	fog_destiny->SetValue(destiny); //Максимальная насыщенность тумана(0-1)
+	//static const auto fog_enable = g_csgo.m_cvar->FindVar(HASH("fog_enable"));
+	//fog_enable->SetValue(1); //Включает туман на карте если он выключен по дефолту
+	//static const auto fog_override = g_csgo.m_cvar->FindVar(HASH("fog_override"));
+	//fog_override->SetValue(g_menu.main.visuals.FogOverride.get()); // Разрешает кастомизацию тумана
+	//static const auto fog_color = g_csgo.m_cvar->FindVar(HASH("fog_color"));
+	//fog_color->SetValue(std::string(std::to_string(g_menu.main.visuals.FogColor.get().r()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().g()) + " " + std::to_string(g_menu.main.visuals.FogColor.get().b())).c_str()); //Цвет тумана rgb
+	//static const auto fog_start = g_csgo.m_cvar->FindVar(HASH("fog_start"));
+	//fog_start->SetValue(g_menu.main.visuals.FogStart.get()); // Дистанция с которой туман появляется
+	//static const auto fog_end = g_csgo.m_cvar->FindVar(HASH("fog_end"));
+	//fog_end->SetValue(g_menu.main.visuals.FogEnd.get()); // Дистанция с которой туман пропадает
+	//static const auto fog_destiny = g_csgo.m_cvar->FindVar(HASH("fog_maxdensity"));
+	//fog_destiny->SetValue(destiny); //Максимальная насыщенность тумана(0-1)
 }
 
 void Client::KillFeed() {
