@@ -201,4 +201,8 @@ namespace callbacks {
 	bool OOFArrowsOn();
 	bool IsAmmoOn();
 	bool IsLBYUpdateOn();
+	bool isDlightSelfOn();
+	bool isDlightEnemyOn();
+	bool isDlightTeamOn();
+	bool isDlightRadiusOn();
 }

@@ -21,6 +21,7 @@ public:
 	using GetStaticData_t = CEconItemDefinition * (__thiscall *)(C_EconItemView *);
 	using ConcatTransforms_t = void(__fastcall *)();
 	using BeamAlloc_t = Beam_t * (__thiscall *)(IViewRenderBeams *, bool);
+	using DlightAlloc_t = Dlight_t * (__thiscall*)(void*, int);
 	using SetupBeam_t = void(__stdcall *)(Beam_t *, const BeamInfo_t &);
 	using ClearNotices_t = void(__thiscall *)(KillFeed_t *);
 	using AddListenerEntity_t = void(__stdcall *)(IEntityListener *);
@@ -66,6 +67,7 @@ public:
 	ILocalize *m_localize;
 	INetworkStringTableContainer *m_networkstringtable;
 	IEngineSound *m_sound;
+	IVEffects* m_effects;
 
 	IClientMode *m_client_mode;
 	CGlobalVarsBase *m_globals;

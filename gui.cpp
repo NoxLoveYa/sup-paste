@@ -163,8 +163,9 @@ void GUI::think() {
 
 				Rect header1{ menu.x + 20, menu.y + 3, 36, 16 };
 
-				if (g_input.IsCursorInRect(header1))
+				if (g_input.IsCursorInRect(header1)) {
 					f->m_current_header = 1;
+				}
 
 				Rect header2{ menu.x + 139, menu.y + 3, 33, 16 };
 

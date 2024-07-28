@@ -125,3 +125,49 @@ public:
         util::get_method< void (__thiscall *)( void *, Beam_t *, BeamInfo_t & ) >( this, UPDATEBEAMINFO )( this, beam, beam_info );
     }
 };
+
+enum dlight_flags {
+	dlight_no_world_illumination = 0x1,
+	dlight_no_model_illumination = 0x2,
+	dlight_add_displacement_alpha = 0x4,
+	dlight_subtract_displacement_alpha = 0x8,
+	dlight_displacement_mask = (dlight_add_displacement_alpha | dlight_subtract_displacement_alpha),
+};
+
+struct ColorRGBExp32
+{
+	byte r, g, b;
+	signed char exponent;
+};
+
+struct Dlight_t {
+	int flags;
+	vec3_t origin;
+	float radius;
+	ColorRGBExp32 color;
+	float die_time;
+	float decay;
+	float min_light;
+	int	key;
+	int	style;
+	vec3_t direction;
+	float inner_angle;
+	float outer_angle;
+};
+
+class IVEffects
+{
+public:
+	Dlight_t* cl_alloc_dlight(int key) {
+		using original_fn = Dlight_t * (__thiscall*)(void*, int);
+		return (*(original_fn**)this)[4](this, key);
+	}
+	Dlight_t* cl_alloc_elight(int key) {
+		using original_fn = Dlight_t * (__thiscall*)(void*, int);
+		return (*(original_fn**)this)[5](this, key);
+	}
+	Dlight_t* get_elight_by_key(int key) {
+		using original_fn = Dlight_t * (__thiscall*)(void*, int);
+		return (*(original_fn**)this)[8](this, key);
+	}
+};

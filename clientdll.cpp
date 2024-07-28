@@ -151,13 +151,12 @@ void Hooks::FrameStageNotify( Stage_t stage ) {
 
 	if( stage == FRAME_RENDER_START ) {
 		// ...
+		g_cl.Skybox();
 	}
 
 	else if( stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START ) {
 		// restore non-compressed netvars.
 		// g_netdata.apply( );
-
-		g_cl.Skybox();
 		g_cl.ClanTag();
 		g_skins.think( );
 	}

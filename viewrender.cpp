@@ -36,6 +36,6 @@ void Hooks::Render2DEffectsPostHUD( const CViewSetup &setup ) {
 
 void Hooks::RenderSmokeOverlay( bool unk ) {
 	// do not render smoke overlay.
-	if (/*!g_csgo.m_engine->IsInGame() || */ !g_menu.main.visuals.removals.get(3) )
+	if ( !g_csgo.m_engine->IsInGame() || !g_menu.main.visuals.removals.get(3) )
 		g_hooks.m_view_render.GetOldMethod< RenderSmokeOverlay_t >( CViewRender::RENDERSMOKEOVERLAY )( this, unk );
 }

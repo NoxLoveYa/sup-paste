@@ -875,3 +875,18 @@ bool callbacks::IsLBYUpdateOn() {
 	return g_menu.main.players.lby_update.get();
 }
 
+bool callbacks::isDlightSelfOn() {
+	return g_menu.main.players.dlight.get(0);
+}
+
+bool callbacks::isDlightEnemyOn() {
+	return g_menu.main.players.dlight.get(1);
+}
+
+bool callbacks::isDlightTeamOn() {
+	return g_menu.main.players.dlight.get(2);
+}
+
+bool callbacks::isDlightRadiusOn() {
+	return isDlightSelfOn() || isDlightEnemyOn() || isDlightTeamOn();
+}

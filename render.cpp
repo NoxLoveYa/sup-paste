@@ -419,6 +419,22 @@ void render::sphere(vec3_t origin, float radius, float angle, float scale, Color
 	}
 }
 
+void render::DrawDlight(Player* player, float radius, Color color, float decay, int style)
+{
+	vec3_t origin = player->m_vecOrigin();
+	Dlight_t* dlight = g_csgo.m_effects->cl_alloc_dlight(player->index());
+	dlight->origin = origin;
+	dlight->radius = radius;
+	dlight->color.r = color.r();
+	dlight->color.g = color.g();
+	dlight->color.b = color.b();
+	dlight->color.exponent = 3.5f;
+	dlight->die_time = g_csgo.m_globals->m_curtime + 0.05f;
+	dlight->style = style;
+	dlight->flags = dlight_flags::dlight_no_model_illumination;
+	dlight->key = player->index();
+}
+
 Vertex render::RotateVertex(const vec2_t& p, const Vertex& v, float angle) {
 	// convert theta angle to sine and cosine representations.
 	float c = std::cos(math::deg_to_rad(angle));

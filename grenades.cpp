@@ -295,7 +295,7 @@ bool Grenades::detonate(size_t tick, CGameTrace& trace) {
 	// convert current simulation tick to time.
 	float time = game::TICKS_TO_TIME(tick);
 
-	// CSmokeGrenadeProjectile::Think_Detonate
+	//CSmokeGrenadeProjectile::Think_Detonate
 	// speed <= 0.1
 	// checked every 0.2s
 

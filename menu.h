@@ -933,6 +933,12 @@ public:
 	Colorpicker   glow_enemy;
 	Colorpicker   glow_friendly;
 	Slider        glow_blend;
+	MultiDropdown dlight;
+	Colorpicker   dlight_color;
+	Colorpicker   dlight_color_enemy;
+	Colorpicker   dlight_color_team;
+	Slider        dlight_radius;
+	Slider        dlight_decay;
 	Checkbox	  chams_local_draw_angles;
 	Checkbox	  chams_local_draw_angles_chams;
 
@@ -1008,7 +1014,6 @@ public:
 		skeleton_friendly.setup(XOR("Friendly color"), XOR("skeleton_friendly"), { 255, 255, 255 });
 		RegisterElement(&skeleton_friendly, 1);
 
-
 		glow.setup(XOR("Glow"), XOR("glow"), { XOR("Enemy"), XOR("Friendly") });
 		RegisterElement(&glow, 1);
 
@@ -1020,6 +1025,25 @@ public:
 
 		glow_blend.setup("", XOR("glow_blend"), 10.f, 100.f, false, 0, 60.f, 1.f, XOR(L"%"));
 		RegisterElement(&glow_blend, 1);
+
+		dlight.setup(XOR("Dlights"), XOR("dlights"), { XOR("Self"), XOR("Enemy"), XOR("Teammates")});
+		RegisterElement(&dlight, 1);
+
+		dlight_color.setup(XOR("Self color"), XOR("dlight_self"), { 180, 60, 120 });
+		dlight_color.AddShowCallback(callbacks::isDlightSelfOn);
+		RegisterElement(&dlight_color, 1);
+
+		dlight_color_enemy.setup(XOR("Enemy color"), XOR("dlight_enemy"), { 180, 60, 120 });
+		dlight_color_enemy.AddShowCallback(callbacks::isDlightEnemyOn);
+		RegisterElement(&dlight_color_enemy, 1);
+
+		dlight_color_team.setup(XOR("Team color"), XOR("dlight_team"), { 180, 60, 120 });
+		dlight_color_team.AddShowCallback(callbacks::isDlightTeamOn);
+		RegisterElement(&dlight_color_team, 1);
+
+		dlight_radius.setup("Radius", XOR("dlight_radius"), 1.f, 450.f, true, 0, 350.f, 1.0f, L".ft");
+		dlight_radius.AddShowCallback(callbacks::isDlightRadiusOn);
+		RegisterElement(&dlight_radius, 1);
 	}
 };
 
@@ -3086,7 +3110,6 @@ public:
 		// visuals
 		RegisterTab(&chams);
 		chams.init();
-
 	}
 };
 

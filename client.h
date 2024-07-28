@@ -144,6 +144,9 @@ public:
 
 	// hack username.
 	std::string m_user;
+
+	//revert skybox
+	std::string o_sky = "";
 };
 
 extern Client g_cl;

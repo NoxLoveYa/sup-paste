@@ -158,85 +158,84 @@ void Client::ClanTag()
 
 void Client::Skybox()
 {
+	// lambda function for setting our skybox
+	auto SetSkybox = [&](std::string sky_name) -> void {
+		using SetSkybox_t = int(__fastcall*)(const char*);
+		static auto SetSkyboxFn = pattern::find(g_csgo.m_engine_dll, XOR("55 8B EC 81 EC ? ? ? ? 56 57 8B F9 C7 45")).as<SetSkybox_t>();
+
+		SetSkyboxFn(sky_name.c_str());
+	};
+
 	static auto sv_skyname = g_csgo.m_cvar->FindVar(HASH("sv_skyname"));
+	static auto r_3dsky = g_csgo.m_cvar->FindVar(HASH("r_3dsky"));
+
 	if (g_menu.main.misc.skyboxchange.get()) {
+		r_3dsky->SetValue(0);
+
 		switch (g_menu.main.misc.skybox.get()) {
 		case 0: //Tibet
-			//sv_skyname->SetValue("cs_tibet");
-			sv_skyname->SetValue(XOR("cs_tibet"));
+			SetSkybox(XOR("cs_tibet"));
 			break;
 		case 1: //Embassy
-			//sv_skyname->SetValue("embassy");
-			sv_skyname->SetValue(XOR("embassy"));
+			SetSkybox(XOR("embassy"));
 			break;
 		case 2: //Italy
-			//sv_skyname->SetValue("italy");
-			sv_skyname->SetValue(XOR("italy"));
+			SetSkybox(XOR("italy"));
 			break;
 		case 3: //Daylight 1
-			//sv_skyname->SetValue("sky_cs15_daylight01_hdr");
-			sv_skyname->SetValue(XOR("sky_cs15_daylight01_hdr"));
+			SetSkybox(XOR("sky_cs15_daylight01_hdr"));
 			break;
 		case 4: //Cloudy
-			//sv_skyname->SetValue("sky_csgo_cloudy01");
-			sv_skyname->SetValue(XOR("sky_csgo_cloudy01"));
+			SetSkybox(XOR("sky_csgo_cloudy01"));
 			break;
 		case 5: //Night 1
-			sv_skyname->SetValue(XOR("sky_csgo_night02"));
+			SetSkybox(XOR("sky_csgo_night02"));
 			break;
 		case 6: //Night 2
-			//sv_skyname->SetValue("sky_csgo_night02b");
-			sv_skyname->SetValue(XOR("sky_csgo_night02b"));
+			SetSkybox(XOR("sky_csgo_night02b"));
 			break;
 		case 7: //Night Flat
-			//sv_skyname->SetValue("sky_csgo_night_flat");
-			sv_skyname->SetValue(XOR("sky_csgo_night_flat"));
+			SetSkybox(XOR("sky_csgo_night_flat"));
 			break;
 		case 8: //Day HD
-			//sv_skyname->SetValue("sky_day02_05_hdr");
-			sv_skyname->SetValue(XOR("sky_day02_05_hdr"));
+			SetSkybox(XOR("sky_day02_05_hdr"));
 			break;
 		case 9: //Day
-			//sv_skyname->SetValue("sky_day02_05");
-			sv_skyname->SetValue(XOR("sky_day02_05"));
+			SetSkybox(XOR("sky_day02_05"));
 			break;
 		case 10: //Rural
-			//sv_skyname->SetValue("sky_l4d_rural02_ldr");
-			sv_skyname->SetValue(XOR("sky_l4d_rural02_ldr"));
+			SetSkybox(XOR("sky_l4d_rural02_ldr"));
 			break;
 		case 11: //Vertigo HD
-			//sv_skyname->SetValue("vertigo_hdr");
-			sv_skyname->SetValue(XOR("vertigo_hdr"));
+			SetSkybox(XOR("vertigo_hdr"));
 			break;
 		case 12: //Vertigo Blue HD
-			//sv_skyname->SetValue("vertigoblue_hdr");
-			sv_skyname->SetValue(XOR("vertigoblue_hdr"));
+			SetSkybox(XOR("vertigoblue_hdr"));
 			break;
 		case 13: //Vertigo
-			//sv_skyname->SetValue("vertigo");
-			sv_skyname->SetValue(XOR("vertigo"));
+			SetSkybox(XOR("vertigo"));
 			break;
 		case 14: //Vietnam
-			//sv_skyname->SetValue("vietnam");
-			sv_skyname->SetValue(XOR("vietnam"));
+			SetSkybox(XOR("vietnam"));
 			break;
 		case 15: //Dusty Sky
-			//sv_skyname->SetValue("sky_dust");
-			sv_skyname->SetValue(XOR("sky_dust"));
+			SetSkybox(XOR("sky_dust"));
 			break;
 		case 16: //Jungle
-			sv_skyname->SetValue(XOR("jungle"));
+			SetSkybox(XOR("jungle"));
 			break;
 		case 17: //Nuke
-			sv_skyname->SetValue(XOR("nukeblank"));
+			SetSkybox(XOR("nukeblank"));
 			break;
 		case 18: //Office
-			sv_skyname->SetValue(XOR("office"));
-			//game::SetSkybox(XOR("office"));
+			SetSkybox(XOR("office"));
 			break;
 		default:
 			break;
 		}
+	}
+	else {
+		r_3dsky->SetValue(1);
 	}
 
 	/*

@@ -131,6 +131,7 @@ public:
     void NoMolly();
     void DrawDamageIndicator();
     void DrawStickman(Player* player, int opacity);
+    void DrawDlight(Player* player, Color color);
     void NoSmoke();
     
     void think();

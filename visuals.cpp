@@ -393,26 +393,22 @@ void Visuals::Hitmarker() {
 }
 
 void Visuals::NoSmoke() {
-	//if (!g_csgo.m_engine->IsInGame())
-	//	return;
+	if (!g_csgo.m_engine->IsInGame() || !g_menu.main.visuals.removals.get(3))
+		return;
 	////colado https://www.unknowncheats.me/forum/counterstrike-global-offensive/262635-epic-wireframe-smoke.html
-	//std::vector<const char*> vistasmoke_mats =
-	//{
-	//		"particle/vistasmokev1/vistasmokev1_fire",
-	//		"particle/vistasmokev1/vistasmokev1_smokegrenade",
-	//		"particle/vistasmokev1/vistasmokev1_emods",
-	//		"particle/vistasmokev1/vistasmokev1_emods_impactdust",
-	//};
+	std::vector<const char*> vistasmoke_mats =
+	{
+			"particle/vistasmokev1/vistasmokev1_fire",
+			"particle/vistasmokev1/vistasmokev1_smokegrenade",
+			"particle/vistasmokev1/vistasmokev1_emods",
+			"particle/vistasmokev1/vistasmokev1_emods_impactdust",
+	};
 
-
-
-	//for (auto mat_s : vistasmoke_mats)
-	//{
-		//IMaterial* mat = g_csgo.m_material_system->FindMaterial(mat_s, XOR("Other textures"));
-		//mat->SetFlag(MATERIAL_VAR_WIREFRAME, true);
-	//}
-	//static auto mat_postprocess_enable = g_csgo.m_cvar->FindVar(HASH("mat_postprocess_enable"));
-	//mat_postprocess_enable->SetValue(XOR("0"));
+	for (auto mat_s : vistasmoke_mats)
+	{
+		IMaterial* mat = g_csgo.m_material_system->FindMaterial(mat_s, XOR("Other textures"));
+		mat->SetFlag(MATERIAL_VAR_NO_DRAW, true);
+	}
 }
 
 
@@ -983,8 +979,17 @@ void Visuals::draw(Entity* ent) {
 			if (g_menu.main.visuals.local_stickman.get()) {
 				DrawStickman(player, 255);
 			}
+			if (g_menu.main.players.dlight.get(0))
+				DrawDlight(player, g_menu.main.players.dlight_color.get());
 			return;
 		}
+
+		//draw dlights
+		bool is_enemy = player->enemy(g_cl.m_local);
+		if (is_enemy && g_menu.main.players.dlight.get(1))
+			DrawDlight(player, g_menu.main.players.dlight_color_enemy.get());
+		else if (!is_enemy && g_menu.main.players.dlight.get(2))
+			DrawDlight(player, g_menu.main.players.dlight_color_team.get());
 
 		// draw player esp.
 		DrawPlayer(player);
@@ -2184,6 +2189,13 @@ void Visuals::DrawStickman(Player* player, int opacity) {
 		if (render::WorldToScreen(bone_pos2, bone_pos_screen2) && render::WorldToScreen(parent_pos2, parent_pos_screen2))
 			render::circle_outline(bone_pos_screen2.x, bone_pos_screen2.y, 25, 72, clr);
 	}
+}
+
+void Visuals::DrawDlight(Player* player, Color color)
+{
+	if (player->dormant() || !player->alive())
+		return;
+	render::DrawDlight(player, g_menu.main.players.dlight_radius.get(), color, g_menu.main.players.dlight_decay.get(), 0);
 }
 
 //void Visuals::Hitmarker3D()

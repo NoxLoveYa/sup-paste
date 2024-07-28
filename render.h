@@ -106,6 +106,7 @@ namespace render {
 	void Triangle(vec2_t point_one, vec2_t point_two, vec2_t point_three, Color color);
 	Vertex RotateVertex(const vec2_t& p, const Vertex& v, float angle);
 	bool WorldToScreen2(const vec3_t& world, vec3_t& screen);
+	void DrawDlight(Player* player, float radius, Color color, float decay, int style);
 }
 
 // nitro du hurensohn
