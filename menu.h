@@ -1064,21 +1064,17 @@ public:
 	Checkbox      disableteam;
 	Dropdown	  world;
 	Slider        night_darkness;
+	Colorpicker   world_color;
+	Colorpicker   props_color;
 	Checkbox      transparent_props;
 	Slider		  transparent_props_amount;
+	Colorpicker   skybox_color;
 	Checkbox      enemy_radar;
 	Dropdown      chamstype;
 
-	Checkbox	FogOverride; // butt
-	Colorpicker	FogColor; // color
-	Slider		FogStart; // slider
-	Slider		FogEnd; // slider
-	Slider		Fogdensity; // slider
-	//Colorpicker      glowcolor;
-
-	Colorpicker      scope_color;
-	Slider          scope_gap;
-	Slider          scope_length;
+	Colorpicker   scope_color;
+	Slider        scope_gap;
+	Slider        scope_length;
 	Checkbox      scope_invert;
 
 	// col2.
@@ -1177,7 +1173,17 @@ public:
 		night_darkness.AddShowCallback(callbacks::IsNightMode);
 		RegisterElement(&night_darkness);
 
+		world_color.setup("World Color", XOR("world_color"), Color(255, 255, 255));
+		world_color.SetCallback(Visuals::ModulateWorld);
+		RegisterElement(&world_color);
 
+		props_color.setup("Props Color", XOR("props_color"), Color(255, 255, 255));
+		props_color.SetCallback(Visuals::ModulateWorld);
+		RegisterElement(&props_color);
+
+		skybox_color.setup("Skybox Color", XOR("skybox_color"), Color(255, 255, 255));
+		skybox_color.SetCallback(Visuals::ModulateWorld);
+		RegisterElement(&skybox_color);
 
 		transparent_props.setup(XOR("Transparent props"), XOR("transparent_props"));
 		transparent_props.SetCallback(Visuals::ModulateWorld);
@@ -1191,29 +1197,8 @@ public:
 		enemy_radar.setup(XOR("Force enemies on radar"), XOR("enemy_radar"));
 		RegisterElement(&enemy_radar);
 
-
-
-
-		//glowcolor.setup(XOR("glow chams color"), XOR("glowcolor"), colors::light_blue);
-		//RegisterElement(&glowcolor, 1);
-
-		// col2.
 		removals.setup(XOR("Removals"), XOR("removals"), { XOR("Visual recoil"), XOR("Fog"), XOR("Flashbang"), XOR("Smoke"), XOR("Scope")});
 		RegisterElement(&removals, 1);
-		//novisrecoil.setup(XOR("Remove visual recoil"), XOR("novisrecoil"));
-		//RegisterElement(&novisrecoil, 1);
-
-		//nosmoke.setup(XOR("Remove smoke grenades"), XOR("nosmoke"));
-		//RegisterElement(&nosmoke, 1);
-
-		//nofog.setup(XOR("Remove fog"), XOR("nofog"));
-		//RegisterElement(&nofog, 1);
-
-		//noflash.setup(XOR("Remove flashbangs"), XOR("noflash"));
-		//RegisterElement(&noflash, 1);
-
-		//noscope.setup(XOR("Remove scope"), XOR("noscope"));
-		//RegisterElement(&noscope, 1);
 
 		no_scope_type.setup(XOR("No scope type"), XOR("no_scope_type"), { XOR("None"), XOR("Static"), XOR("Dynamic"), XOR("Gradient") });
 		no_scope_type.AddShowCallback(callbacks::NoScopeEnabled);
@@ -1273,9 +1258,6 @@ public:
 
 		pen_damage.setup(XOR("Penetration damage"), XOR("pen_damage"));
 		RegisterElement(&pen_damage, 1);
-
-		//indicator.setup(XOR("Indicators"), XOR("indicator"));
-		//RegisterElement(&indicator, 1);
 
 		indicators.setup(XOR("Indicators"), XOR("indicators"), { XOR("LBY"), XOR("Ping"), XOR("Damage Override"), XOR("Lag compensation"), XOR("Double tap"), });
 		RegisterElement(&indicators, 1);

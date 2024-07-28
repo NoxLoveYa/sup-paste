@@ -7,7 +7,7 @@ void Visuals::ModulateWorld() {
 	if (!g_cl.m_local || !g_csgo.m_engine->IsInGame())
 		return;
 
-	std::vector< IMaterial* > world, props;
+	std::vector< IMaterial* > world, props, skybox;
 
 	// iterate material handles.
 	for (uint16_t h{ g_csgo.m_material_system->FirstMaterial() }; h != g_csgo.m_material_system->InvalidMaterial(); h = g_csgo.m_material_system->NextMaterial(h)) {
@@ -23,24 +23,28 @@ void Visuals::ModulateWorld() {
 		// store props.
 		else if (FNV1a::get(mat->GetTextureGroupName()) == HASH("StaticProp textures"))
 			props.push_back(mat);
+
+		//store skybox.
+		else if (FNV1a::get(mat->GetTextureGroupName()) == HASH("SkyBox textures"))
+			skybox.push_back(mat);
 	}
 
 	// night
 	if (g_menu.main.visuals.world.get() == 1) {
 		const float world_darkness = 1.f - (g_menu.main.visuals.night_darkness.get() / 100.f);
 		const float prop_darkness = 1.3f - (g_menu.main.visuals.night_darkness.get() / 100.f);
+		Color world_color = g_menu.main.visuals.world_color.get();
+		Color props_color = g_menu.main.visuals.props_color.get();
 
 		for (const auto& w : world)
-			w->ColorModulate(world_darkness, world_darkness, world_darkness);
+			w->ColorModulate((world_color.r() * world_darkness) / 255, (world_color.g() * world_darkness) / 255, (world_color.b() * world_darkness) / 255);
 
 		// IsUsingStaticPropDebugModes my nigga
 		if (g_csgo.r_DrawSpecificStaticProp->GetInt() != 0) {
 			g_csgo.r_DrawSpecificStaticProp->SetValue(0);
 		}
-		for (const auto& p : props)
-			p->ColorModulate(prop_darkness, prop_darkness, prop_darkness);
-
-		//game::SetSkybox(XOR("sky_csgo_night02"));
+		for (const auto& p : props) 
+			p->ColorModulate((props_color.r() * prop_darkness) / 255, (props_color.g() * prop_darkness) / 255, (props_color.b() * prop_darkness) / 255);
 	}
 
 	// disable night.
@@ -74,13 +78,16 @@ void Visuals::ModulateWorld() {
 	else {
 
 		// restore r_DrawSpecificStaticProp.
-		if (g_csgo.r_DrawSpecificStaticProp->GetInt() != -1) {
+		if (g_menu.main.visuals.world.get() == 0 && g_csgo.r_DrawSpecificStaticProp->GetInt() != -1) {
 			g_csgo.r_DrawSpecificStaticProp->SetValue(-1);
 		}
 
 		for (const auto& p : props)
 			p->AlphaModulate(1.0f);
 	}
+
+	for (const auto& sky : skybox)
+		sky->ColorModulate(g_menu.main.visuals.skybox_color.get());
 }
 
 
