@@ -165,22 +165,29 @@ void GUI::think() {
 
 				if (g_input.IsCursorInRect(header1)) {
 					f->m_current_header = 1;
+					f->m_active_tab = f->m_tabs[0];
 				}
 
 				Rect header2{ menu.x + 139, menu.y + 3, 33, 16 };
 
-				if (g_input.IsCursorInRect(header2))
+				if (g_input.IsCursorInRect(header2)) {
 					f->m_current_header = 2;
+					f->m_active_tab = f->m_tabs[2];
+				}
 
 				Rect header3{ menu.x + 472, menu.y + 3, 26, 16 };
 
-				if (g_input.IsCursorInRect(header3))
+				if (g_input.IsCursorInRect(header3)) {
 					f->m_current_header = 3;
+					f->m_active_tab = f->m_tabs[6];
+				}
 
 				Rect header4{ menu.x + 563, menu.y + 3, 38, 16 };
 
-				if (g_input.IsCursorInRect(header4))
+				if (g_input.IsCursorInRect(header4)) {
 					f->m_current_header = 4;
+					f->m_active_tab = f->m_tabs[7];
+				}
 			}
 		}
 

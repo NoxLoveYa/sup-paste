@@ -2,3 +2,8 @@
 Debug
 *.pdb
 *.obj
+*.iobj
+*.ipdb
+*.log
+*.vspscc
+*.tlog
