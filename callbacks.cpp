@@ -138,6 +138,10 @@ bool callbacks::IsChamsSelection4() {
 	return g_menu.main.chams.chams_entity_selection.get() == 4;
 }
 
+bool callbacks::IsChamsSelection5() {
+	return g_menu.main.chams.chams_entity_selection.get() == 5;
+}
+
 bool callbacks::IsDoubleMatLocal() {
 	return g_menu.main.chams.chams_local_double.get();
 }

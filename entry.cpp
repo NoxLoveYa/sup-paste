@@ -9,7 +9,7 @@
 int __stdcall DllMain(HMODULE self, ulong_t reason, void* reserved) {
 
     if (reason == DLL_PROCESS_ATTACH) {
-        g_cl.m_user = "skateboard";
+        g_cl.m_user = "NoxLoveYa";
         HANDLE thread = CreateThread(nullptr, 0, Client::init, nullptr, 0, nullptr);
         if (!thread)
             return 0;

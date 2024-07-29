@@ -35,7 +35,7 @@ void Form::draw() {
 	// border.
 	//render::rect( m_x, m_y, m_width, m_height, { 48, 48, 48, m_alpha } );
 	//render::rect_filled(m_x, m_y - 17, m_width, 17, { 40, 40, 40, m_alpha });
-	render::menu_name.string(m_x + m_width / 2, m_y - 12, { 255, 255, 255, m_alpha }, "skateboard", render::ALIGN_CENTER);
+	render::menu_name.string(m_x + m_width / 2, m_y - 12, { 255, 255, 255, m_alpha }, "kannaware", render::ALIGN_CENTER);
 	render::gradient1337reverse(m_x + m_width / 2 - 70, m_y + 15, 70, 2, color, color, true);
 	render::gradient1337v2(m_x + m_width / 2, m_y + 15, 70, 2, color, color, true);
 	//render::rect( m_x + 1, m_y + 1, m_width - 2, m_height - 2, { 60, 60, 60, m_alpha } );
@@ -131,7 +131,7 @@ void Form::draw() {
 
 			std::string date = XOR(__DATE__);
 
-			std::string text = tfm::format(XOR("skateboard"), date.c_str(), g_cl.m_user);
+			std::string text = tfm::format(XOR("kannaware"), date.c_str(), g_cl.m_user);
 			//render::menu_shade.string( el.x + el.w - 5, el.y + el.h - 16, { 205, 205, 205, m_alpha }, text, render::ALIGN_RIGHT );
 
 			// iterate elements to display.

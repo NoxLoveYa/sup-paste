@@ -17,7 +17,7 @@ ulong_t __stdcall Client::init(void* arg) {
 	g_csgo.m_engine->ExecuteClientCmd("clear");
 
 	// welcome the user.
-	g_notify.add(tfm::format(XOR("welcome to skateboard\n")));
+	g_notify.add(tfm::format(XOR("welcome to kannaware\n")));
 
 
 	return 1;
@@ -30,7 +30,7 @@ void Client::DrawHUD() {
 	float h_index = 0;
 
 	// colors
-	const auto col_background = Color(0, 100, 0, 232);
+	const auto col_background = Color(25, 25, 25, 232);
 	const auto col_accent = g_menu.main.config.menu_color.get();
 
 	// get time.
@@ -55,14 +55,13 @@ void Client::DrawHUD() {
 	// get server ip / type
 	const char* server_ip = g_csgo.m_engine->GetNetChannelInfo() ? g_csgo.m_engine->GetNetChannelInfo()->GetAddress() : XOR("");
 
-	std::string text = tfm::format(XOR("skateboard | [dev] | ping: %i ms"), ms);
+	std::string text = tfm::format(XOR("kannaware | [dev version] | ping: %i ms"), ms);
 	render::FontSize_t size = render::watermark.size(text);
 
 	// background.
+	render::rect_filled(m_width - size.m_width - 15, 5, size.m_width + 9, 2, col_accent);
 	render::rect_filled(m_width - size.m_width - 15, 7, size.m_width + 9, size.m_height + 5, col_background); // background
-	////render::DrawRectGradientHorizontal(m_width - size.m_width - 15, 25, size.m_width - 213, 4, col_accent, Color(180, 180, 180, 195)); // left white line
-	//render::DrawRectGradientHorizontal(m_width - 228, 25, 15, 4, Color(180, 180, 180, 195), col_accent); // right white line
-	//render::DrawRectGradientHorizontal(m_width - 213, 25, 207, 4, col_accent, col_accent); // rightest color
+	//render::gradient1337reverse(m_width - size.m_width - 15, 3, size.m_width + 9, 4, col_background, col_background, true);
 
 	// text.
 	render::watermark.string(m_width - 10, 9, { 255, 255, 255, 255 }, text, render::ALIGN_RIGHT);
@@ -728,7 +727,7 @@ void Client::print(const std::string text, ...) {
 	va_end(list);
 
 	// print to console.
-	g_csgo.m_cvar->ConsoleColorPrintf(g_menu.main.config.menu_color.get(), XOR("[skateboard] "));
+	g_csgo.m_cvar->ConsoleColorPrintf(g_menu.main.config.menu_color.get(), XOR("[kannaware] "));
 	g_csgo.m_cvar->ConsoleColorPrintf(colors::white, buf.c_str());
 }
 

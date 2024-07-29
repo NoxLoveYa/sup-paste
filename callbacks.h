@@ -113,6 +113,7 @@ namespace callbacks {
 	bool IsChamsSelection2();
 	bool IsChamsSelection3();
 	bool IsChamsSelection4();
+	bool IsChamsSelection5();
 
 	bool IsDoubleMatLocal();
 	bool IsDoubleMatEnemy();

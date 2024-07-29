@@ -1197,7 +1197,7 @@ public:
 		enemy_radar.setup(XOR("Force enemies on radar"), XOR("enemy_radar"));
 		RegisterElement(&enemy_radar);
 
-		removals.setup(XOR("Removals"), XOR("removals"), { XOR("Visual recoil"), XOR("Fog"), XOR("Flashbang"), XOR("Smoke"), XOR("Scope")});
+		removals.setup(XOR("Removals"), XOR("removals"), { XOR("Visual recoil"), XOR("Fog"), XOR("Flashbang"), XOR("Smoke"), XOR("Scope"), XOR("Teammates")});
 		RegisterElement(&removals, 1);
 
 		no_scope_type.setup(XOR("No scope type"), XOR("no_scope_type"), { XOR("None"), XOR("Static"), XOR("Dynamic"), XOR("Gradient") });
@@ -2792,11 +2792,16 @@ public:
 	Checkbox      chams_enemy_history_double_wireframe;
 	Slider        chams_enemy_history_double_blend;
 
+	Checkbox      chams_arms;
+	Dropdown	  chams_arms_mat;
+	Colorpicker   chams_arms_col;
+	Checkbox      chams_arms_wireframe;
+
 public:
 	void init() {
 		SetTitle(XOR("Chams"));
 
-		chams_entity_selection.setup("Chams selection", XOR("chams_entity_selection"), { XOR("Local"), XOR("Enemy"), XOR("Friendly"), XOR("Fake"), XOR("Backtrack") });
+		chams_entity_selection.setup("Chams selection", XOR("chams_entity_selection"), { XOR("Local"), XOR("Enemy"), XOR("Friendly"), XOR("Fake"), XOR("Backtrack"), XOR("Arms")});
 		RegisterElement(&chams_entity_selection);
 
 		chams_local.setup(XOR("Chams local"), XOR("chams_local"));
@@ -3034,6 +3039,22 @@ public:
 		chams_enemy_history_double_blend.AddShowCallback(callbacks::IsChamsSelection4);
 		chams_enemy_history_double_blend.AddShowCallback(callbacks::IsDoubleMatFake);
 		RegisterElement(&chams_enemy_history_double_blend, 1);
+
+		chams_arms.setup(XOR("Chams Arms"), XOR("chams_arms"));
+		chams_arms.AddShowCallback(callbacks::IsChamsSelection5);
+		RegisterElement(&chams_arms);
+
+		chams_arms_mat.setup(XOR("Chams Arms material"), XOR("chams_arms_mat"), { XOR("Material"), XOR("Flat"), XOR("Glass"), XOR("Metallic"), XOR("Shade"), XOR("Glow") });
+		chams_arms_mat.AddShowCallback(callbacks::IsChamsSelection5);
+		RegisterElement(&chams_arms_mat);
+
+		chams_arms_col.setup(XOR("Color"), XOR("chams_arms_col"), { 255, 255, 255 });
+		chams_arms_col.AddShowCallback(callbacks::IsChamsSelection5);
+		RegisterElement(&chams_arms_col);
+
+		chams_arms_wireframe.setup(XOR("Wireframe"), XOR("chams_arms_wireframe"));
+		chams_arms_wireframe.AddShowCallback(callbacks::IsChamsSelection5);
+		RegisterElement(&chams_arms_wireframe);
 	}
 };
 

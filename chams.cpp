@@ -9,6 +9,12 @@ Chams::model_type_t Chams::GetModelType(const ModelRenderInfo_t& info) {
 	if (mdl.find(XOR("player")) != std::string::npos && info.m_index >= 1 && info.m_index <= 64)
 		return model_type_t::player;
 
+	if (mdl.find(XOR("arms")) != std::string::npos)
+		return model_type_t::arms;
+
+	if (mdl.find(XOR("weapons/")) != std::string::npos)
+		return model_type_t::weapon;
+
 	return model_type_t::invalid;
 }
 
@@ -134,6 +140,9 @@ bool Chams::OverridePlayer(int index) {
 
 	// we have chams on enemies.
 	if (enemy && g_menu.main.chams.chams_enemy.get(0))
+		return true;
+
+	if (!enemy && g_menu.main.visuals.removals.get(5))
 		return true;
 
 	return false;
@@ -291,11 +300,19 @@ void Chams::RenderHistoryChams(int index) {
 	}
 }
 
-bool Chams::DrawModel(uintptr_t ctx, const DrawModelState_t& state, const ModelRenderInfo_t& info, matrix3x4_t* bone) {
+bool Chams::DrawModel(uintptr_t ctx, const DrawModelState_t& state, const ModelRenderInfo_t& info, matrix3x4_t* bone, Hooks* o_this) {
 	// store and validate model type.
 	model_type_t type = GetModelType(info);
+
 	if (type == model_type_t::invalid)
 		return true;
+
+	if (type == model_type_t::arms && !m_running && !g_csgo.m_studio_render->m_pForcedMaterial && g_menu.main.chams.chams_arms.get()) {
+		SetupMaterial(m_materials[0], colors::black, false, false);
+		g_hooks.m_model_render.GetOldMethod< Hooks::DrawModelExecute_t >(IVModelRender::DRAWMODELEXECUTE)(o_this, ctx, state, info, bone);
+		SetupMaterial(m_materials[g_menu.main.chams.chams_arms_mat.get()], g_menu.main.chams.chams_arms_col.get(), false, g_menu.main.chams.chams_arms_wireframe.get());
+		return true;
+	}
 
 	// is a valid player.
 	if (type == model_type_t::player) {
@@ -511,6 +528,8 @@ bool Chams::SortPlayers() {
 		if (!OverridePlayer(i))
 			continue;
 
+		if (g_menu.main.visuals.removals.get(5) && !player->enemy(g_cl.m_local))
+			continue;
 		m_players.push_back(player);
 	}
 

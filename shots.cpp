@@ -353,9 +353,9 @@ void Shots::OnHurt(IGameEvent* evt) {
 
 			case 2:
 				if (damage > 99)
-					g_csgo.m_engine->ExecuteClientCmd("say skateboard > ayyware");	
+					g_csgo.m_engine->ExecuteClientCmd("say kannaware > ayyware");	
 				else
-					g_csgo.m_engine->ExecuteClientCmd("say skateboard > all");
+					g_csgo.m_engine->ExecuteClientCmd("say kannaware > all");
 				break;
 
 			case 3:
@@ -376,7 +376,7 @@ void Shots::OnHurt(IGameEvent* evt) {
 				if (damage > 99)
 					g_csgo.m_engine->ExecuteClientCmd("say nice paste bro");
 				else
-					g_csgo.m_engine->ExecuteClientCmd("say refund your skeet.idb, get skateboard");
+					g_csgo.m_engine->ExecuteClientCmd("say refund your skeet.idb, get kannaware");
 				break;
 
 			case 6:

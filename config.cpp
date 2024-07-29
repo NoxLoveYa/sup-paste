@@ -14,7 +14,7 @@ void Config::init( ) {
 		return;
 
 	// append our subdir.
-	g_winapi.PathAppendA((char*)m_path.c_str(), "skateboard");
+	g_winapi.PathAppendA((char*)m_path.c_str(), "kannaware");
 
 	// create folder if not present.
 	g_winapi.CreateDirectoryA( m_path.c_str( ), 0 );
